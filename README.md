@@ -147,7 +147,7 @@ MODEL_PATH = r"runs\detect\pothole_yolov8s\weights\best.pt"
 + 해결
 ```
 python -m pip install streamlit
-python -m streamlit run app_final.py
+streamlit run app_final.py
 ```
 
 #### 3. 유튜브 영상 다운로드가 실패합니다. (yt-dlp 관련)
@@ -201,4 +201,4 @@ python -m pip install yt-dlp
 - Classes: 1 - pothole
 - Total Images: 665
 - Train / Val / Test split: 80 / 10 / 10
-- Annotation format: YOLOv8n
+- Annotation format: YOLOv8s
