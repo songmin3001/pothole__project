@@ -15,19 +15,19 @@
 4. CPU 환경에서도 구동 가능해야 한다.
 
 > 따라서 본 프로젝트는 단순히 YOLO 모델을 적용하는 것이 아니라,
-전처리 전략, 학습 파라미터 튜닝, confidence threshold 최적화,
-그리고 ROI 기반 추론 구조 설계를 통해 실제 도로 관제 시스템에 적용 가능한 최적화된 포트홀 탐지 파이프라인 을 구축하는 것을 목표로 한다.
+전처리 전략, 학습 파라미터 튜닝, confidence threshold 최적화를 통해 실제 도로 관제 시스템에 적용 가능한 최적화된 포트홀 탐지 파이프라인을 구축하는 것을 목표로 한다.
 
 ### How to run
-본 프로젝트는 다음 3단계로 실행된다.
+본 프로젝트는 다음과 같은 단계로 실행된다.
 
 1. Dataset 생성 및 전처리
 2. YOLOv8 모델 학습
-3. ROI 기반 실시간 추론 실행
+3. Web 실행
 
 #### 1.Environment Setup
 1. Python 3.9 이상 권장
 필수 라이브러리 설치 :
+
 ```
 pip install ultralytics opencv-python numpy pandas
 ```
@@ -38,6 +38,7 @@ pip install ultralytics opencv-python streamlit yt-dlp numpy pandas
 
 #### 2. Dataset 생성 + 전처리
 + 원본 데이터 구조
+  
 ```
 archive/
  ├── images/
@@ -46,7 +47,7 @@ archive/
 
 + 실행
 ```
-python train.py
+python cartoon.py
 ```
 
 + 실행 process
@@ -73,36 +74,34 @@ dataset_yolo/
 
 #### 4. 성능 확인
 ```
- python check_result.py
+ python final_boost.py
 ```
 
  + 출력 예시
-===== TEST SET PERFORMANCE =====
+```
 mAP@50     : 0.7443
 Precision  : 0.7901
 Recall     : 0.6584
+```
 
 #### 5. Confidence Threshold 최적화
+
 ```
-python find_sweet_spot.py
+python find_best_config.py
 ```
 
-#### 6. 최종 ROI 기반 추론 실행
-```
-python inference_roi.py
-```
+#### 6. 최종 실행 
 
-#### 7. 최종 실행 
 ```
 streamlit run app_final.py
 ```
 
-#### 8. 순서 요약
-1. train.py 실행
-2. check_result.py 실행
-3. find_sweet_spot.py 실행
-4. inference_roi.py 실행
+#### 7. 순서 요약
 
+1. python cartoon.py
+2. python final_boost.py
+3. python find_best_config.py
+4. streamlit run app_final.py
 
 ### 문제 해결 방법
 아래는 프로젝트 실행 중 자주 발생하는 문제와 해결 방법입니다.
@@ -123,7 +122,7 @@ streamlit run app_final.py
 예시(정상 경로):
 - `runs/detect/pothole_yolov8s/weights/best.pt`
 
-2. `app_final.py`, `inference_roi.py` 등에서 아래처럼 수정합니다.
+2. `app_final.py` 등에서 아래처럼 수정합니다.
 
 Mac/Linux:
 ```python
@@ -193,7 +192,7 @@ python -m pip install yt-dlp
 
 + 해결
 - resume_video()에서 감지 직후 프레임을 건너뛰도록 설정되어 있어야 함
-- st.session_state.current_frame += 30  # 약 1초 스킵
+- st.session_state.current_frame += 30  # 약 0.3초 스킵
 - 필요 시 30 → 60으로 늘려서 중복 감지를 더 줄일 수 있음
 
 ### Dataset
