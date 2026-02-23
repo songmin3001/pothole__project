@@ -1,0 +1,11 @@
+runs/
+__pycache__/
+*.pt
+*.pth
+*.cache
+.env
+dataset_*/
+*.mp4
+*.mov
+*.avi
+.DS_Store
