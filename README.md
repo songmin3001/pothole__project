@@ -38,9 +38,11 @@ pip install ultralytics opencv-python streamlit yt-dlp numpy pandas
 
 #### 2. Dataset 생성 + 전처리
 + 원본 데이터 구조
+```
 archive/
  ├── images/
  └── annotations/  (Pascal VOC XML)
+```
 
 + 실행
 ```
@@ -54,6 +56,7 @@ python train.py
 - data.yaml 생성
 
 + 생성 결과
+```
 dataset_yolo/
  ├── images/
  │    ├── train/
@@ -61,6 +64,7 @@ dataset_yolo/
  │    └── test/
  ├── labels/
  └── data.yaml
+```
 
 #### 3. Model Training
 ```
