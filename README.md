@@ -109,8 +109,8 @@ streamlit run app_final.py
 
 #### 1. best.pt 파일을 찾을 수 없습니다. (FileNotFoundError)
 + 증상
- + `경로를 확인해주세요. 파일을 찾을 수 없습니다.`
- + `Missing best.pt`
+++ `경로를 확인해주세요. 파일을 찾을 수 없습니다.`
+++ `Missing best.pt`
 
 + 원인 
  + `MODEL_PATH`가 잘못됨 (특히 `runs/detect`가 중복되는 경우가 많음)
