@@ -108,15 +108,15 @@ streamlit run app_final.py
 
 
 #### 1. best.pt 파일을 찾을 수 없습니다. (FileNotFoundError)
-+ 증상
-++ `경로를 확인해주세요. 파일을 찾을 수 없습니다.`
-++ `Missing best.pt`
+##### 증상
++  `경로를 확인해주세요. 파일을 찾을 수 없습니다.`
++ `Missing best.pt`
 
-+ 원인 
+##### 원인 
  + `MODEL_PATH`가 잘못됨 (특히 `runs/detect`가 중복되는 경우가 많음)
  + 학습이 완료되지 않아 best.pt가 생성되지 않음
 
-+ 해결
+##### 해결
 1. 실제 파일 위치를 먼저 확인합니다.
 
 예시(정상 경로):
@@ -136,14 +136,14 @@ MODEL_PATH = r"runs\detect\pothole_yolov8s\weights\best.pt"
 
 #### 2. streamlit 실행이 안 됩니다. (command not found / ModuleNotFound)
 
-+ 증상
+##### 증상
  - streamlit: command not found
  - ModuleNotFoundError: streamlit
 
-+ 원인
+##### 원인
  - streamlit이 설치되지 않았거나, 현재 파이썬 환경과 설치 환경이 다름
 
-+ 해결
+##### 해결
 ```
 python -m pip install streamlit
 streamlit run app_final.py
@@ -151,14 +151,15 @@ streamlit run app_final.py
 
 #### 3. 유튜브 영상 다운로드가 실패합니다. (yt-dlp 관련)
 
-+ 증상
+##### 증상
  - 다운로드 버튼을 눌러도 영상이 생성되지 않음
  - yt-dlp 에러 발생
 
-+ 원인
+##### 원인
  - yt-dlp 미설치 또는 일부 유튜브 영상은 제한/차단
 
-+ 해결
+##### 해결
+
 1. 설치 확인
 ```
 python -m pip install yt-dlp
@@ -169,28 +170,29 @@ python -m pip install yt-dlp
 
 #### 4. 영상이 분석되지 않습니다. (temp_stream.mp4 없음)
 
-+ 증상
+##### 증상
  - 분석할 영상이 없습니다. 유튜브 링크를 넣거나 파일을 업로드하세요.
 
-+ 원인
+##### 원인
  - temp_stream.mp4 파일이 아직 생성되지 않음
  - 다운로드/업로드 전에 "관제 시작"을 눌렀음
 
-+ 해결
+##### 해결
+
 1. 유튜브: 영상 준비(다운로드) 먼저 클릭
 2. 파일: mp4 업로드 후 자동 저장 확인
 3. 그 다음 관제 시작/재개 버튼 클릭
 
 #### 5. 팝업이 계속 뜨고 영상이 안 이어집니다. (중복 감지)
 
-+ 증상
+##### 증상
  - 포트홀이 한 번 감지된 이후 같은 지점에서 계속 감지됨
 
-+ 원인
+##### 원인
  - 감지 직후 같은 프레임 근처에서 다시 탐지되는 상황
  - 이어보기 로직이 제대로 적용되지 않음
 
-+ 해결
+##### 해결
  - resume_video()에서 감지 직후 프레임을 건너뛰도록 설정되어 있어야 함
  - st.session_state.current_frame += 30  # 약 0.3초 스킵
  - 필요 시 30 → 60으로 늘려서 중복 감지를 더 줄일 수 있음
